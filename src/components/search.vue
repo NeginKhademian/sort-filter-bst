@@ -61,7 +61,7 @@ export default {
           for (const key in newInputs) {
             if (Object.hasOwnProperty.call(newInputs, key)) {
               const element = newInputs[key];
-              element.value ? (query[key] = element.value) : (query[key] = null);
+              element.value ? (query[key] = element.value) : delete query[key];
             }
           }
 
