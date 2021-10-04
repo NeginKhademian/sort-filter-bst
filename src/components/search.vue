@@ -47,15 +47,7 @@ export default {
       }
       this.mount = true;
     },
-  },
-  mounted() {
-    this.setData();
-  },
-  watch: {
-    inputs: {
-      deep: true,
-      handler(newInputs) {
-        if (this.mount) {
+    generateQuery(newInputs){
             // generate query and pass input`s value to parent
           let query = Object.assign({}, this.$route.query);
           for (const key in newInputs) {
@@ -67,6 +59,17 @@ export default {
 
           if (Object.entries(query) != Object.entries(this.$route.query))
             this.$router.push({ path: "/", query: query }).catch(() => {});
+    }
+  },
+  mounted() {
+    this.setData();
+  },
+  watch: {
+    inputs: {
+      deep: true,
+      handler(newInputs) {
+        if (this.mount) {
+        this.generateQuery(newInputs)
           this.getSearchData(newInputs);
         }
       },
